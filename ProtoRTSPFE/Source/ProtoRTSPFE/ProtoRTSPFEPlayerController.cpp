@@ -4,7 +4,6 @@
 #include "Blueprint/AIBlueprintHelperLibrary.h"
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
-#include "ProtoRTSPFECharacter.h"
 #include "Engine/World.h"
 #include "Engine.h"
 
@@ -16,6 +15,7 @@ AProtoRTSPFEPlayerController::AProtoRTSPFEPlayerController()
 
 void AProtoRTSPFEPlayerController::BeginPlay()
 {
+	// Take Size of the screen
 	GetViewportSize(ScreenWitdh, ScreenHeight);
 }
 
@@ -23,32 +23,29 @@ void AProtoRTSPFEPlayerController::CheckMousePosition()
 {
 	float MousePositionX;
 	float MousePositionY;
-	GetViewportSize(ScreenWitdh, ScreenHeight);
 
+	// Take Position Of the Mouse On The Viewport
 	GetMousePosition(MousePositionX, MousePositionY);
-	GetViewportSize(ScreenWitdh, ScreenHeight);
 
-	if (MousePositionX < ScreenMovementMargin)
-	{
-		MousePositionX = 0;
-		MoveUpDownCamera(-1.f);
-	}
-	else if (MousePositionX > ScreenWitdh - ScreenMovementMargin)
-	{
-		MousePositionX = ScreenWitdh;
-		MoveUpDownCamera(1.f);
-	}
+	//Check Border to know if the camera need to move
+	CheckBorderRightLeft(MousePositionY);
+	CheckBorderUpDown(MousePositionX);
+}
 
-	if (MousePositionY < ScreenMovementMargin)
-	{
-		MousePositionY = 0;
+void AProtoRTSPFEPlayerController::CheckBorderRightLeft(float MousePosY)
+{
+	if (MousePosY < ScreenMovementMargin)
 		MoveRightLeftCamera(1.f);
-	}
-	else if (MousePositionY > ScreenHeight - ScreenMovementMargin)
-	{
-		MousePositionY = ScreenHeight;
+	else if (MousePosY > ScreenHeight - ScreenMovementMargin)
 		MoveRightLeftCamera(-1.f);
-	}
+}
+
+void AProtoRTSPFEPlayerController::CheckBorderUpDown(float MousePosX)
+{
+	if (MousePosX < ScreenMovementMargin)
+		MoveUpDownCamera(-1.f);
+	else if (MousePosX > ScreenWitdh - ScreenMovementMargin)
+		MoveUpDownCamera(1.f);
 }
 
 void AProtoRTSPFEPlayerController::PlayerTick(float DeltaTime)
@@ -58,12 +55,6 @@ void AProtoRTSPFEPlayerController::PlayerTick(float DeltaTime)
 	CheckMousePosition();
 
 	UpdateMovementCamera(DeltaTime);
-
-	// keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
-	{
-		MoveToMouseCursor();
-	}
 }
 
 void AProtoRTSPFEPlayerController::UpdateMovementCamera(float DeltaTime)
@@ -92,49 +83,13 @@ void AProtoRTSPFEPlayerController::OnResetVR()
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void AProtoRTSPFEPlayerController::MoveToMouseCursor()
-{
-	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
-	{
-		if (AProtoRTSPFECharacter* MyPawn = Cast<AProtoRTSPFECharacter>(GetPawn()))
-		{
-			if (MyPawn->GetCursorToWorld())
-			{
-				UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, MyPawn->GetCursorToWorld()->GetComponentLocation());
-			}
-		}
-	}
-	else
-	{
-		// Trace to see what is under the mouse cursor
-		FHitResult Hit;
-		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-	}
-}
-
-void AProtoRTSPFEPlayerController::OnSetDestinationPressed()
-{
-	// set flag to keep updating destination until released
-	bMoveToMouseCursor = true;
-}
-
-void AProtoRTSPFEPlayerController::OnSetDestinationReleased()
-{
-	// clear flag to indicate we should stop updating the destination
-	bMoveToMouseCursor = false;
-}
-
 void AProtoRTSPFEPlayerController::MoveRightLeftCamera(float ratio)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
-
 	InputMoveVector += FVector(ratio, 0, 0);
 }
  
 void AProtoRTSPFEPlayerController::MoveUpDownCamera(float ratio)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
-
 	InputMoveVector += FVector(0, ratio, 0);
 }
 
@@ -143,18 +98,18 @@ void AProtoRTSPFEPlayerController::ZoomInOutCamera(float ratio)
 	AProtoRTSPFECharacter* character = Cast<AProtoRTSPFECharacter>(GetCharacter());
 
 	if (ratio < 0)
-	{
 		character->GetCameraBoom()->TargetArmLength *= 0.90;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "debug msg");
-	}
 	else if (ratio > 0)
-	{
 		character->GetCameraBoom()->TargetArmLength *= 1.10;
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, "debug msg");
-	}
 
-	if (character->GetCameraBoom()->TargetArmLength < 300)
-		character->GetCameraBoom()->TargetArmLength = 300;
-	else if (character->GetCameraBoom()->TargetArmLength > 1100)
-		character->GetCameraBoom()->TargetArmLength = 1100;
+	CheckRangeOfZoom(character);
 }
+
+void AProtoRTSPFEPlayerController::CheckRangeOfZoom(AProtoRTSPFECharacter* character)
+{
+	if (character->GetCameraBoom()->TargetArmLength < ZoomMinRange)
+		character->GetCameraBoom()->TargetArmLength = ZoomMinRange;
+	else if (character->GetCameraBoom()->TargetArmLength > ZoomMaxRange)
+		character->GetCameraBoom()->TargetArmLength = ZoomMaxRange;
+}
+

@@ -17,7 +17,6 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFECharacter() {}
 	PROTORTSPFE_API UClass* Z_Construct_UClass_AProtoRTSPFECharacter();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	UPackage* Z_Construct_UPackage__Script_ProtoRTSPFE();
-	PROTORTSPFE_API UClass* Z_Construct_UClass_AProtoRTSPFEPlayerController_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UDecalComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
@@ -35,10 +34,6 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFECharacter() {}
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_PlayerController_MetaData[];
-#endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_PlayerController;
 #if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_CursorToWorld_MetaData[];
 #endif
@@ -68,14 +63,6 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFECharacter() {}
 		{ "ModuleRelativePath", "ProtoRTSPFECharacter.h" },
 	};
 #endif
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_PlayerController_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "Camera" },
-		{ "ModuleRelativePath", "ProtoRTSPFECharacter.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_PlayerController = { "PlayerController", nullptr, (EPropertyFlags)0x0040000000020015, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AProtoRTSPFECharacter, PlayerController), Z_Construct_UClass_AProtoRTSPFEPlayerController_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_PlayerController_MetaData, ARRAY_COUNT(Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_PlayerController_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_CursorToWorld_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
@@ -110,7 +97,6 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFECharacter() {}
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_TopDownCameraComponent = { "TopDownCameraComponent", nullptr, (EPropertyFlags)0x00400000000a001d, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AProtoRTSPFECharacter, TopDownCameraComponent), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_TopDownCameraComponent_MetaData, ARRAY_COUNT(Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_TopDownCameraComponent_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AProtoRTSPFECharacter_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_PlayerController,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_CursorToWorld,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_CameraBoom,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AProtoRTSPFECharacter_Statics::NewProp_TopDownCameraComponent,
@@ -142,7 +128,7 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFECharacter() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AProtoRTSPFECharacter, 889888733);
+	IMPLEMENT_CLASS(AProtoRTSPFECharacter, 1105709613);
 	template<> PROTORTSPFE_API UClass* StaticClass<AProtoRTSPFECharacter>()
 	{
 		return AProtoRTSPFECharacter::StaticClass();

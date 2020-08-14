@@ -60,8 +60,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AProtoRTSPFECharacter); \
 #define ProtoRTSPFE_Source_ProtoRTSPFE_ProtoRTSPFECharacter_h_12_PRIVATE_PROPERTY_OFFSET \
 	FORCEINLINE static uint32 __PPO__TopDownCameraComponent() { return STRUCT_OFFSET(AProtoRTSPFECharacter, TopDownCameraComponent); } \
 	FORCEINLINE static uint32 __PPO__CameraBoom() { return STRUCT_OFFSET(AProtoRTSPFECharacter, CameraBoom); } \
-	FORCEINLINE static uint32 __PPO__CursorToWorld() { return STRUCT_OFFSET(AProtoRTSPFECharacter, CursorToWorld); } \
-	FORCEINLINE static uint32 __PPO__PlayerController() { return STRUCT_OFFSET(AProtoRTSPFECharacter, PlayerController); }
+	FORCEINLINE static uint32 __PPO__CursorToWorld() { return STRUCT_OFFSET(AProtoRTSPFECharacter, CursorToWorld); }
 
 
 #define ProtoRTSPFE_Source_ProtoRTSPFE_ProtoRTSPFECharacter_h_9_PROLOG

@@ -88,8 +88,3 @@ void AProtoRTSPFECharacter::Tick(float DeltaSeconds)
 		}
 	}
 }
-
-void AProtoRTSPFECharacter::MoveUpCamera()
-{
-	SetActorTransform(GetActorTransform() + FTransform(FVector(0,0,1)));
-}

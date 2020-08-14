@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "ProtoRTSPFECharacter.h"
 #include "ProtoRTSPFEPlayerController.generated.h"
 
 UCLASS()
@@ -18,6 +19,10 @@ public:
 	void MoveUpDownCamera(float ratio);
 
 	void ZoomInOutCamera(float ratio);
+	void CheckRangeOfZoom(AProtoRTSPFECharacter* character);
+
+	int ZoomMaxRange = 1100;
+	int ZoomMinRange = 300;
 
 	float CameraSpeed = 5.f;
 
@@ -29,16 +34,13 @@ public:
 
 	void UpdateMovementCamera(float DeltaTime);
 
-	void Test(float ratio);
-
 	void CheckMousePosition();
+	void CheckBorderRightLeft(float MousePosY);
+	void CheckBorderUpDown(float MousePosX);
 
 	virtual void BeginPlay() override;
 
 protected:
-	/** True if the controlled character should navigate to the mouse cursor. */
-	uint32 bMoveToMouseCursor : 1;
-
 	// Begin PlayerController interface
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
@@ -46,11 +48,4 @@ protected:
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();
-
-	/** Navigate player to the current mouse cursor location. */
-	void MoveToMouseCursor();
-
-	/** Input handlers for SetDestination action. */
-	void OnSetDestinationPressed();
-	void OnSetDestinationReleased();
 };

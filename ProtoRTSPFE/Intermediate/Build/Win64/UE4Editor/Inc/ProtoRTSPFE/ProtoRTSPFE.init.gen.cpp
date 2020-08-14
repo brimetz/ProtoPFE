@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeProtoRTSPFE_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x70B94A2C,
+				0x8BD6F062,
 				0xD3C8C5E5,
 				METADATA_PARAMS(nullptr, 0)
 			};
