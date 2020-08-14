@@ -1,0 +1,22 @@
+Todo :
+- Trouver l'idée du RTS
+- Etoffer Niveau Design le jeu
+- Penser a le Scooper ++ et a faire les Iterations possibles
+- Reflechir a comment faire le proto :
+					- maybe plus de GP ou Autre
+					- Chose indispensable 
+					- chose optionnelle
+					- Ordre de priorité
+- Faire le proto
+- Preparer le Spitch
+
+
+
+
+
+Reflection niveau GP : Reseau sur Unreal, IA De RTS, Camera, UI, Etat de Garde, Generation de Carte ? , 
+			liste des outils a mettre a dispositions des GD (Editeurs, mise en situation etc...)
+
+
+
+

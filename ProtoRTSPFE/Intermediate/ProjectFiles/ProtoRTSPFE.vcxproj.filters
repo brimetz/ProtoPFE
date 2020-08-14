@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\ProtoRTSPFE.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{377D09A5-D8BC-495D-AF11-AD81B0FD9C5D}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ProtoRTSPFE.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\ProtoRTSPFEEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{C2F476BD-88C9-4D7A-8E06-1A90895E56F0}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\ProtoRTSPFE">
+      <UniqueIdentifier>{00045F3C-2FD1-443C-9421-10032DAB840C}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFE.Build.cs">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFE.cpp">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFE.h">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFECharacter.cpp">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFECharacter.h">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFEGameMode.cpp">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFEGameMode.h">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFEPlayerController.cpp">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\ProtoRTSPFE\ProtoRTSPFEPlayerController.h">
+      <Filter>Source\ProtoRTSPFE</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
