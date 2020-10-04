@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\LastStand.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{D3C0248D-D1A0-4D9D-B7F5-C7D6B3573DC0}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LastStand.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\LastStandEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{65235B34-E53D-4C47-B29D-87EEF538869B}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorPerProjectUserSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\LastStand">
+      <UniqueIdentifier>{6484EDF6-CE70-420B-A875-9A68BF8B6B07}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\LastStand\LastStand.Build.cs">
+      <Filter>Source\LastStand</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\LastStand\LastStand.cpp">
+      <Filter>Source\LastStand</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\LastStand.h">
+      <Filter>Source\LastStand</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LastStand\LastStandCharacter.cpp">
+      <Filter>Source\LastStand</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\LastStandCharacter.h">
+      <Filter>Source\LastStand</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LastStand\LastStandGameMode.cpp">
+      <Filter>Source\LastStand</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\LastStandGameMode.h">
+      <Filter>Source\LastStand</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LastStand\LastStandPlayerController.cpp">
+      <Filter>Source\LastStand</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\LastStandPlayerController.h">
+      <Filter>Source\LastStand</Filter>
+    </ClInclude>
+    <Filter Include="Source\LastStand\Survival">
+      <UniqueIdentifier>{9202CA1B-BB6D-4255-B697-4BA1A7EA5721}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\LastStand\Survival\SurvivalGameMode.cpp">
+      <Filter>Source\LastStand\Survival</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\Survival\SurvivalGameMode.h">
+      <Filter>Source\LastStand\Survival</Filter>
+    </ClInclude>
+    <Filter Include="Source\LastStand\Survival\Player">
+      <UniqueIdentifier>{DEE149B6-8A89-45D2-835A-7823B39E6265}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\LastStand\Survival\Player\SurvivalPlayerController.cpp">
+      <Filter>Source\LastStand\Survival\Player</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\Survival\Player\SurvivalPlayerController.h">
+      <Filter>Source\LastStand\Survival\Player</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\LastStand\Survival\Player\SurvivalPlayerPawn.cpp">
+      <Filter>Source\LastStand\Survival\Player</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\LastStand\Survival\Player\SurvivalPlayerPawn.h">
+      <Filter>Source\LastStand\Survival\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

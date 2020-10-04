@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "LastStand",
+			"Path": "C:\\Users\\bapti\\OneDrive\\Documents\\Travail\\ProjetInfo\\Unreal LastStand\\LastStand\\Source\\LastStand.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "LastStandEditor",
+			"Path": "C:\\Users\\bapti\\OneDrive\\Documents\\Travail\\ProjetInfo\\Unreal LastStand\\LastStand\\Source\\LastStandEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

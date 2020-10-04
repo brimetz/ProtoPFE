@@ -1,2 +1,0 @@
-C:\Users\bapti\OneDrive\Documents\Travail\ProtoPFE\ProtoRTSPFE\Intermediate\Build\Win64\UE4Editor\Development\ProtoRTSPFE\Definitions.ProtoRTSPFE.h
-C:\Users\bapti\OneDrive\Documents\Travail\ProtoPFE\ProtoRTSPFE\Source\ProtoRTSPFE\ProtoRTSPFE.h
