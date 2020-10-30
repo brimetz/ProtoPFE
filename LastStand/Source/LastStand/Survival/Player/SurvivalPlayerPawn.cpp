@@ -12,7 +12,7 @@
 // Sets default values
 ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 
@@ -21,9 +21,12 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
+	m_root = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
+	RootComponent = m_root;
+
 	// Create a camera boom...
 	m_cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	m_cameraBoom->SetupAttachment(RootComponent);
+	m_cameraBoom->SetupAttachment(m_root);
 	m_cameraBoom->SetAbsolute(false, true, false);
 	m_cameraBoom->TargetArmLength = 800.f;
 	m_cameraBoom->SetRelativeRotation(FRotator(-60.f, 0.f, 0.f));
@@ -36,7 +39,7 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 
 	// Create a decal in the world to show the cursor's location
 	m_cursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
-	m_cursorToWorld->SetupAttachment(RootComponent);
+	m_cursorToWorld->SetupAttachment(m_root);
 	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/LastStand/Arts/Survival/UI/Cursor/M_Cursor_Decal.M_Cursor_Decal'"));
 	if (DecalMaterialAsset.Succeeded())
 	{

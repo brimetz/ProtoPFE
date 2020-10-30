@@ -16,6 +16,8 @@ class LASTSTAND_API ASurvivalPlayerPawn : public APawn
 	GENERATED_BODY()
 
 private:
+	USceneComponent* m_root = nullptr;
+
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* m_camera;

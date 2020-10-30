@@ -9,6 +9,7 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "SurvivalPlayerPawn.h"
 
@@ -76,6 +77,12 @@ void ASurvivalPlayerController::zoomCamera(float _fRatio)
 		_aPawn->getCameraBoom()->TargetArmLength *= 1 + m_fZoomCoefficient;
 	}
 
+	//if (_aPawn->getCameraBoom()->TargetArmLength < m_iZoomMinRange)
+	//	_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMinRange;
+	//else if (_aPawn->getCameraBoom()->TargetArmLength > m_iZoomMaxRange)
+	//	_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMaxRange;
+
+	//if (_aPawn)
 	checkZoomRange(_aPawn);
 }
 
@@ -99,7 +106,7 @@ void ASurvivalPlayerController::OnWheelReleased()
 
 void ASurvivalPlayerController::checkZoomRange(ASurvivalPlayerPawn* _aPawn)
 {
-	if (!_aPawn)
+	if (!_aPawn || !_aPawn->getCameraBoom())
 		return;
 
 	if (_aPawn->getCameraBoom()->TargetArmLength < m_iZoomMinRange)
@@ -119,6 +126,9 @@ void ASurvivalPlayerController::updateCamera(float _fDeltaTime)
 	{
 		FVector _vNewLocation = _aPawn->GetActorLocation();
 		_vNewLocation += m_vInputVector * m_fCameraSpeed;
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, (m_vInputVector * m_fCameraSpeed).ToString());
+		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, (_vNewLocation).ToString());
+
 		_aPawn->SetActorLocation(_vNewLocation);
 	}
 
