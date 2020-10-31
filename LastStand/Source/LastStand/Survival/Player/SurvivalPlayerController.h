@@ -7,6 +7,10 @@
 #include "SurvivalPlayerController.generated.h"
 
 class ASurvivalPlayerPawn;
+class ASurvivalHUD;
+class USpringArmComponent;
+
+class AUnitSelectable;
 
 /**
  * 
@@ -31,6 +35,14 @@ private:
 
 	void zoomCamera(float _fRatio);
 
+	void selectionPressed();
+	void selectionReleased();
+
+	void ctrlClickSelection();
+	void releaseCtrlClick();
+
+	void interaction();
+
 #pragma endregion
 
 #pragma region Zoom
@@ -48,7 +60,7 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Zoom, meta = (AllowPrivateAccess = "true"))
 	float m_fZoomCoefficient = 0.10f;
 
-	void checkZoomRange(ASurvivalPlayerPawn* _aPawn);
+	void checkZoomRange(USpringArmComponent* _cameraBoom);
 
 #pragma endregion
 
@@ -74,6 +86,18 @@ private:
 	void computeMouseLocation();
 	void computeWheelClickMove(float _fMouseXLocation, float _fMouseYLocation);
 	void checkScreenMargin(float _fMouseXLocation, float _fMouseYLocation);
+
+#pragma endregion
+
+#pragma region HUD
+
+	ASurvivalHUD* m_survivalHUD = nullptr;
+
+#pragma endregion
+
+#pragma region Units
+
+	TArray<AUnitSelectable*> m_liSelectedActors;
 
 #pragma endregion
 

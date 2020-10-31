@@ -12,6 +12,8 @@
 #include "Kismet/GameplayStatics.h"
 
 #include "SurvivalPlayerPawn.h"
+#include "../SurvivalHUD.h"
+#include "../Units/UnitSelectable.h"
 
 ASurvivalPlayerController::ASurvivalPlayerController()
 {
@@ -23,6 +25,9 @@ void ASurvivalPlayerController::BeginPlay()
 {
 	// Take Size of the Screen
 	GetViewportSize(m_iScreenWidth, m_iScreenHeight);
+
+	// Init HUD Pointeur
+	m_survivalHUD = Cast<ASurvivalHUD>(GetHUD());
 }
 
 void ASurvivalPlayerController::PlayerTick(float DeltaTime)
@@ -40,12 +45,25 @@ void ASurvivalPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
+	// Camera Mouvement 
 	InputComponent->BindAxis("Forward", this, &ASurvivalPlayerController::cameraVerticalMovement);
 	InputComponent->BindAxis("Right", this, &ASurvivalPlayerController::cameraHorizontalMovement);
 	InputComponent->BindAxis("Zoom", this, &ASurvivalPlayerController::zoomCamera);
 
 	InputComponent->BindAction("WheelClick", EInputEvent::IE_Pressed, this, &ASurvivalPlayerController::OnWheelClicked);
 	InputComponent->BindAction("WheelClick", EInputEvent::IE_Released, this, &ASurvivalPlayerController::OnWheelReleased);
+	//
+
+	// Controls
+	InputComponent->BindAction("LeftMouseClick", IE_Pressed, this, &ASurvivalPlayerController::selectionPressed);
+	InputComponent->BindAction("LeftMouseClick", IE_Released, this, &ASurvivalPlayerController::selectionReleased);
+
+	InputComponent->BindAction("CtrlLeftMouseClick", IE_Pressed, this, &ASurvivalPlayerController::ctrlClickSelection);
+	InputComponent->BindAction("CtrlLeftMouseClick", IE_Released, this, &ASurvivalPlayerController::releaseCtrlClick);
+	
+	InputComponent->BindAction("RightMouseClick", IE_Released, this, &ASurvivalPlayerController::interaction);
+	//
+
 }
 
 void ASurvivalPlayerController::cameraVerticalMovement(float _fRatio)
@@ -68,22 +86,20 @@ void ASurvivalPlayerController::zoomCamera(float _fRatio)
 	if (!_aPawn)
 		return;
 
+	USpringArmComponent* _cameraBoom = _aPawn->getCameraBoom();
+	if (!_cameraBoom)
+		return;
+
 	if (0 > _fRatio)
 	{
-		_aPawn->getCameraBoom()->TargetArmLength *= 1 - m_fZoomCoefficient;
+		_cameraBoom->TargetArmLength *= 1 - m_fZoomCoefficient;
 	}
 	else
 	{
-		_aPawn->getCameraBoom()->TargetArmLength *= 1 + m_fZoomCoefficient;
+		_cameraBoom->TargetArmLength *= 1 + m_fZoomCoefficient;
 	}
 
-	//if (_aPawn->getCameraBoom()->TargetArmLength < m_iZoomMinRange)
-	//	_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMinRange;
-	//else if (_aPawn->getCameraBoom()->TargetArmLength > m_iZoomMaxRange)
-	//	_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMaxRange;
-
-	//if (_aPawn)
-	checkZoomRange(_aPawn);
+	checkZoomRange(_cameraBoom);
 }
 
 void ASurvivalPlayerController::OnWheelClicked()
@@ -100,19 +116,53 @@ void ASurvivalPlayerController::OnWheelReleased()
 	m_fWheelClickWidthLocation = m_fWheelClickHeightLocation = 0.0f;
 }
 
+void ASurvivalPlayerController::selectionPressed()
+{
+	m_survivalHUD->m_vInitialSelectionPoint = m_survivalHUD->getMousePos2D();
+	m_survivalHUD->m_bSelecting = true;
+}
+
+void ASurvivalPlayerController::selectionReleased()
+{
+	m_survivalHUD->m_bSelecting = false;
+	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+}
+
+void ASurvivalPlayerController::ctrlClickSelection()
+{
+	m_survivalHUD->m_vInitialSelectionPoint = m_survivalHUD->getMousePos2D();
+	m_survivalHUD->m_bCtrlClickSelectionUpdate = true;
+}
+
+void ASurvivalPlayerController::releaseCtrlClick()
+{
+	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+}
+
+void ASurvivalPlayerController::interaction()
+{
+	if (m_liSelectedActors.Num() > 0)
+	{
+		for (int32 i = 0; i < m_liSelectedActors.Num(); i++)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Green, "Interaction with one Unit");
+		}
+	}
+}
+
 #pragma endregion
 
 #pragma region Zoom
 
-void ASurvivalPlayerController::checkZoomRange(ASurvivalPlayerPawn* _aPawn)
+void ASurvivalPlayerController::checkZoomRange(USpringArmComponent* _cameraBoom)
 {
-	if (!_aPawn || !_aPawn->getCameraBoom())
+	if (!_cameraBoom)
 		return;
 
-	if (_aPawn->getCameraBoom()->TargetArmLength < m_iZoomMinRange)
-		_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMinRange;
-	else if (_aPawn->getCameraBoom()->TargetArmLength > m_iZoomMaxRange)
-		_aPawn->getCameraBoom()->TargetArmLength = m_iZoomMaxRange;
+	if (_cameraBoom->TargetArmLength < m_iZoomMinRange)
+		_cameraBoom->TargetArmLength = m_iZoomMinRange;
+	else if (_cameraBoom->TargetArmLength > m_iZoomMaxRange)
+		_cameraBoom->TargetArmLength = m_iZoomMaxRange;
 }
 
 #pragma endregion
@@ -126,8 +176,6 @@ void ASurvivalPlayerController::updateCamera(float _fDeltaTime)
 	{
 		FVector _vNewLocation = _aPawn->GetActorLocation();
 		_vNewLocation += m_vInputVector * m_fCameraSpeed;
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, (m_vInputVector * m_fCameraSpeed).ToString());
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Red, (_vNewLocation).ToString());
 
 		_aPawn->SetActorLocation(_vNewLocation);
 	}

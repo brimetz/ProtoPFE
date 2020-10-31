@@ -26,11 +26,11 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 
 	// Create a camera boom...
 	m_cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	m_cameraBoom->SetupAttachment(m_root);
+	m_cameraBoom->SetupAttachment(RootComponent);
 	m_cameraBoom->SetAbsolute(false, true, false);
 	m_cameraBoom->TargetArmLength = 800.f;
 	m_cameraBoom->SetRelativeRotation(FRotator(-60.f, 0.f, 0.f));
-	m_cameraBoom->bDoCollisionTest = false; // Don't want to pull camera in when it collides with level
+	m_cameraBoom->bDoCollisionTest = false; // Don't want to pull camera in when it collides with level*/
 
 	// Create a camera...// Create a camera...
 	m_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
@@ -39,7 +39,7 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 
 	// Create a decal in the world to show the cursor's location
 	m_cursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
-	m_cursorToWorld->SetupAttachment(m_root);
+	m_cursorToWorld->SetupAttachment(RootComponent);
 	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/LastStand/Arts/Survival/UI/Cursor/M_Cursor_Decal.M_Cursor_Decal'"));
 	if (DecalMaterialAsset.Succeeded())
 	{
