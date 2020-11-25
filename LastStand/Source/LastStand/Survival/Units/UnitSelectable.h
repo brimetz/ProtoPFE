@@ -33,6 +33,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OnDoubleClicked();
 
+	UFUNCTION(BlueprintCallable)
 	void setSelected();
+	UFUNCTION(BlueprintCallable)
 	void setDeselected();
 };

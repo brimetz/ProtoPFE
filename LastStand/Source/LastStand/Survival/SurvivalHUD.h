@@ -33,4 +33,8 @@ public:
 
 	bool m_bSelecting = false;
 	bool m_bCtrlClickSelectionUpdate = false;
+
+
+	UFUNCTION(BlueprintCallable)
+	void AddUnit(AUnitSelectable* _unit);
 };

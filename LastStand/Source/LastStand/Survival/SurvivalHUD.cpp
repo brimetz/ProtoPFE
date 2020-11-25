@@ -81,3 +81,9 @@ FVector2D ASurvivalHUD::getMousePos2D()
 
 	return FVector2D(_fPosX, _fPosY);
 }
+
+void ASurvivalHUD::AddUnit(AUnitSelectable* _unit)
+{
+	if (!FindUnitInArray(m_liCurrentActorSelection, _unit))
+		m_liCurrentActorSelection.Emplace(_unit);
+}

@@ -49,7 +49,7 @@ void AUnitSelectable::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 void AUnitSelectable::OnDoubleClicked()
 {
-	// Acces C++ Sur le Character afin de deplacer le controller du joueur qui a clické sur cette IA 
+	// Acces C++ Sur le Character afin de deplacer le controller du joueur qui a clickï¿½ sur cette IA 
 
 	/*ASurvivalPlayerController* _playerController = GetController<ASurvivalPlayerController>();
 	if (_playerController)
