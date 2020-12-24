@@ -108,4 +108,8 @@ protected:
 	// PlayerController Interface
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void SetupInputComponent() override;
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void UpdateSelection();
 };
