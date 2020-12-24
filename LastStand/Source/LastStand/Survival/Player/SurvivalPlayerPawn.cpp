@@ -21,12 +21,15 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	m_root = CreateDefaultSubobject<USceneComponent>(TEXT("Scene"));
-	RootComponent = m_root;
+	InitCamera();
+	InitCursor();
+}
 
+void ASurvivalPlayerPawn::InitCamera()
+{
 	// Create a camera boom...
 	m_cameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	m_cameraBoom->SetupAttachment(RootComponent);
+	RootComponent = m_cameraBoom;
 	m_cameraBoom->SetAbsolute(false, true, false);
 	m_cameraBoom->TargetArmLength = 800.f;
 	m_cameraBoom->SetRelativeRotation(FRotator(-60.f, 0.f, 0.f));
@@ -36,7 +39,10 @@ ASurvivalPlayerPawn::ASurvivalPlayerPawn()
 	m_camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	m_camera->SetupAttachment(m_cameraBoom, USpringArmComponent::SocketName);
 	m_camera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+}
 
+void ASurvivalPlayerPawn::InitCursor()
+{
 	// Create a decal in the world to show the cursor's location
 	m_cursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
 	m_cursorToWorld->SetupAttachment(RootComponent);
