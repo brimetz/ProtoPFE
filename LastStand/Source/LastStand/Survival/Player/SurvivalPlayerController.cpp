@@ -125,7 +125,7 @@ void ASurvivalPlayerController::selectionPressed()
 void ASurvivalPlayerController::selectionReleased()
 {
 	m_survivalHUD->m_bSelecting = false;
-	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+	UpdateSelection();
 }
 
 void ASurvivalPlayerController::ctrlClickSelection()
@@ -136,7 +136,7 @@ void ASurvivalPlayerController::ctrlClickSelection()
 
 void ASurvivalPlayerController::releaseCtrlClick()
 {
-	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+	UpdateSelection();
 }
 
 void ASurvivalPlayerController::interaction()
@@ -231,3 +231,8 @@ void ASurvivalPlayerController::computeWheelClickMove(float _fMouseXLocation, fl
 }
 
 #pragma endregion
+
+void ASurvivalPlayerController::UpdateSelection()
+{
+	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+}
