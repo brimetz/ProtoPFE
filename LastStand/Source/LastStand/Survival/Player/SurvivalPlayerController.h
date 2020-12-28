@@ -11,6 +11,7 @@ class ASurvivalHUD;
 class USpringArmComponent;
 
 class AUnitSelectable;
+class ASquad;
 
 /**
  * 
@@ -97,7 +98,7 @@ private:
 
 #pragma region Units
 
-	TArray<AUnitSelectable*> m_liSelectedActors;
+	TArray<ASquad*> m_liSelectedSquads;
 
 #pragma endregion
 

@@ -3,6 +3,7 @@
 #include "SurvivalHUD.h"
 
 #include "Units/UnitSelectable.h"
+#include "Units/Squad.h"
 
 void ASurvivalHUD::DrawHUD()
 {
@@ -14,29 +15,32 @@ void ASurvivalHUD::DrawHUD()
 
 		if (_liBufferList.Num() > 0)
 		{
-			if (FindUnitInArray(m_liCurrentActorSelection, _liBufferList[0]))
+			if (FindUnitInArray(m_liCurrentSquadsSelection, _liBufferList[0]))
 			{
-				_liBufferList[0]->setDeselected();
-				m_liCurrentActorSelection.Remove(_liBufferList[0]);
+				_liBufferList[0]->m_pSquadParent->setDeselected();
+				m_liCurrentSquadsSelection.Remove(_liBufferList[0]->m_pSquadParent);
 			}
 			else
 			{
-				_liBufferList[0]->setSelected();
-				m_liCurrentActorSelection.Emplace(_liBufferList[0]);
+				_liBufferList[0]->m_pSquadParent->setSelected();
+				m_liCurrentSquadsSelection.Emplace(_liBufferList[0]->m_pSquadParent);
 			}
 		}
 	}
 
 	else if (m_bSelecting)
 	{
-		if (m_liCurrentActorSelection.Num() > 0)
+		if (m_liCurrentSquadsSelection.Num() > 0)
 		{
-			for (int32 i = 0; i < m_liCurrentActorSelection.Num(); i++)
+			for (int32 i = 0; i < m_liCurrentSquadsSelection.Num(); i++)
 			{
-				m_liCurrentActorSelection[i]->setDeselected();
+				m_liCurrentSquadsSelection[i]->setDeselected();
 			}
 		}
+		m_liCurrentSquadsSelection.Empty();
+
 		m_liCurrentActorSelection.Empty();
+
 
 		m_vCurrentSelectionPoint = getMousePos2D();
 		DrawRect(FLinearColor(0, 0, 1, 0.15f),
@@ -49,20 +53,25 @@ void ASurvivalHUD::DrawHUD()
 		{
 			for (int32 i = 0; i < m_liCurrentActorSelection.Num(); i++)
 			{
-				m_liCurrentActorSelection[i]->setSelected();
+				AddUnit(m_liCurrentActorSelection[i]);
 			}
+		}
+
+		for (int32 i = 0; i < m_liCurrentSquadsSelection.Num(); i++)
+		{
+			m_liCurrentSquadsSelection[i]->setSelected();
 		}
 	}
 }
 
-bool ASurvivalHUD::FindUnitInArray(TArray<AUnitSelectable*> _array, AUnitSelectable* _unitToSearch)
+bool ASurvivalHUD::FindUnitInArray(TArray<ASquad*> _array, AUnitSelectable* _unitToSearch)
 {
 	if (_array.Num() <= 0)
 		return false;
 
 	for (int32 i = 0; i < _array.Num(); i++)
 	{
-		if (_array[i] == _unitToSearch)
+		if (_array[i] == _unitToSearch->m_pSquadParent)
 			return true;
 	}
 	return false;
@@ -84,6 +93,6 @@ FVector2D ASurvivalHUD::getMousePos2D()
 
 void ASurvivalHUD::AddUnit(AUnitSelectable* _unit)
 {
-	if (!FindUnitInArray(m_liCurrentActorSelection, _unit))
-		m_liCurrentActorSelection.Emplace(_unit);
+	if (!FindUnitInArray(m_liCurrentSquadsSelection, _unit))
+		m_liCurrentSquadsSelection.Emplace(_unit->m_pSquadParent);
 }

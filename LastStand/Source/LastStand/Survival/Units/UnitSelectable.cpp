@@ -7,6 +7,8 @@
 
 #include "../Player/SurvivalPlayerController.h"
 
+#include "Squad.h"
+
 // Sets default values
 AUnitSelectable::AUnitSelectable()
 {

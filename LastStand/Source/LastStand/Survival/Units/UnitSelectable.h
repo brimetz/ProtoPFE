@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "UnitSelectable.generated.h"
 
+class ASquad;
+
 UCLASS()
 class LASTSTAND_API AUnitSelectable : public ACharacter
 {
@@ -37,4 +39,6 @@ public:
 	void setSelected();
 	UFUNCTION(BlueprintCallable)
 	void setDeselected();
+
+	ASquad* m_pSquadParent = nullptr;
 };

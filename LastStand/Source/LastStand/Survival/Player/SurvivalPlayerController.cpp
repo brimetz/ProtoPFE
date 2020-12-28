@@ -14,6 +14,7 @@
 #include "SurvivalPlayerPawn.h"
 #include "../SurvivalHUD.h"
 #include "../Units/UnitSelectable.h"
+#include "../Units/Squad.h"
 
 ASurvivalPlayerController::ASurvivalPlayerController()
 {
@@ -141,11 +142,11 @@ void ASurvivalPlayerController::releaseCtrlClick()
 
 void ASurvivalPlayerController::interaction()
 {
-	if (m_liSelectedActors.Num() > 0)
+	if (m_liSelectedSquads.Num() > 0)
 	{
-		for (int32 i = 0; i < m_liSelectedActors.Num(); i++)
+		for (int32 i = 0; i < m_liSelectedSquads.Num(); i++)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Green, "Interaction with one Unit");
+			GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Green, "Interaction with one Squad");
 		}
 	}
 }
@@ -234,5 +235,5 @@ void ASurvivalPlayerController::computeWheelClickMove(float _fMouseXLocation, fl
 
 void ASurvivalPlayerController::UpdateSelection()
 {
-	m_liSelectedActors = m_survivalHUD->m_liCurrentActorSelection;
+	m_liSelectedSquads = m_survivalHUD->m_liCurrentSquadsSelection;
 }

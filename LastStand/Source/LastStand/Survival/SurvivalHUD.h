@@ -7,6 +7,7 @@
 #include "SurvivalHUD.generated.h"
 
 class AUnitSelectable;
+class ASquad;
 
 /**
  * 
@@ -16,8 +17,9 @@ class LASTSTAND_API ASurvivalHUD : public AHUD
 {
 	GENERATED_BODY()
 private:
-	bool FindUnitInArray(TArray<AUnitSelectable*> _array, AUnitSelectable* _unitToSearch);
+	bool FindUnitInArray(TArray<ASquad*> _array, AUnitSelectable* _unitToSearch);
 
+	TArray<AUnitSelectable*> m_liCurrentActorSelection;
 
 public:
 	virtual void DrawHUD() override; // Same as Tick()
@@ -29,7 +31,7 @@ public:
 
 	FVector2D getMousePos2D();
 
-	TArray<AUnitSelectable*> m_liCurrentActorSelection;
+	TArray<ASquad*> m_liCurrentSquadsSelection;
 
 	bool m_bSelecting = false;
 	bool m_bCtrlClickSelectionUpdate = false;
